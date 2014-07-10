@@ -5,7 +5,7 @@ $(function () {
     var msgCnt = $('#msg').val().length,
         srcCnt = $('#src').val().length,
         count = msgCnt + srcCnt + (srcCnt > 0 ? 1 : 0);
-    $('#count').text(count);
+    $('#count').text(140 - count);
   };
 
   $('#msg').on('keyup', function (e) {
