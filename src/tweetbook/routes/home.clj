@@ -13,12 +13,11 @@
      {::file (file (str (io/resource-path) "/index.html"))}])
 
   :handle-ok
-  (fn [{{{resource :resource} :route-params} :request}]
-    (clojure.java.io/input-stream (io/get-resource "/index.html")))
+  (fn [_] (clojure.java.io/input-stream (io/get-resource "/index.html")))
 
   :last-modified
-  (fn [{{{resource :resource} :route-params} :request}]
-    (.lastModified (file (str (io/resource-path) "/index.html")))))
+  (fn [_] (.lastModified (file (str (io/resource-path) "/index.html")))))
+
 
 (defroutes home-routes
   (ANY "/" [] home))
