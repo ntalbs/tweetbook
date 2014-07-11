@@ -9,7 +9,7 @@
                  [ring-server "0.3.1"]
                  [lib-noir "0.8.4"]
                  [twitter-api "0.7.5"]
-                 [com.novemberain/monger "2.0.0-rc1"]
+                 [com.novemberain/monger "2.0.0"]
                  ]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler tweetbook.handler/app
