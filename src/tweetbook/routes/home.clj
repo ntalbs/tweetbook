@@ -3,7 +3,8 @@
             [liberator.core :refer [defresource resource request-method-in]]
             [cheshire.core :refer [generate-string]]
             [noir.io :as io]
-            [clojure.java.io :refer [file]]))
+            [clojure.java.io :refer [file]]
+            [tweetbook.models.db :as db]))
 
 (defresource home
   :allowed-methods [:get]
@@ -25,11 +26,9 @@
   :available-media-types ["application/json"]
   :post!
   (fn [context]
-    (let [mesg (get-in context [:request :form-params])]
-      (println (class mesg))
-      (println (mesg "src"))
-      (println (mesg "mesg"))
-      (println mesg)))
+    (let [params (get-in context [:request :form-params])]
+      (db/insert-msg {:msg (params "msg"), :src (params "src")})
+      (if (= (params "tweet-immediately") "on") (println "tweet-immediately on"))))
   :handle-created
   (fn [_] (generate-string {:result "OK"})))
 
