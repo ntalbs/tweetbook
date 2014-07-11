@@ -16,8 +16,18 @@ $(function () {
   });
 
   $('form').submit(function (e) {
-    $('#msg').val('').focus();
-    $('#src').val('');
+    $.post(
+      "/addmesg",
+      { mesg: $('#msg').val(), src: $('#src').val(), "tweet-immediately":  $('#tweet-immediately').val()}
+    ).done(function (data) {
+      console.log(data);
+      $('#msg').val('').focus();
+      $('#src').val('');
+      $('#tweet-immediately').val('');
+    }).fail(function (data) {
+      console.error(data);
+      console.error('fail');
+    });
     return false;
   });
 });
