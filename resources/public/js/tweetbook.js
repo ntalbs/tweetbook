@@ -16,7 +16,7 @@ $(function () {
       src: $('#src').val(),
       "tweet-immediately":  $('#tweet-immediately').val()
     };
-    var $listItem = $('<li>'+quote.msg+'<br>'+quote.src +'</li>');
+    var $listItem = $('<div class="alert alert-dismissible"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+quote.msg+'<br>'+quote.src +'</div>');
 
     $listItem.appendTo($('#list-container')).css({color: "gray"});
 
@@ -25,8 +25,9 @@ $(function () {
       $('#msg').val('').focus();
       $('#src').val('');
       $('#tweet-immediately').val('');
-      $listItem.css({color: "green"});
+      $listItem.addClass('alert-success');
     }).fail(function (data) {
+      $listItem.addClass('alert-danger');
       console.error(data);
       console.error('fail');
     });
