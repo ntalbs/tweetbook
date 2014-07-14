@@ -17,5 +17,6 @@
         rnd (rand-int cnt)
         {:keys [msg src]} (first (mq/with-collection db "quotes"
                                    (mq/skip rnd)
+                                   (mq/limit 1)
                                    (mq/snapshot)))]
     (str msg "\n" src)))
