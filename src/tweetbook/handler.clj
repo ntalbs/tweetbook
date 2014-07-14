@@ -7,11 +7,18 @@
             [compojure.route :as route]
             [noir.session :as session]
             [ring.middleware.session.memory :refer [memory-store]]
+            [overtone.at-at :refer [every mk-pool]]
+            [tweetbook.models.config :refer [tweet-interval]]
+            [tweetbook.models.tweet :refer [tweet-random]]
             [tweetbook.routes.auth :refer [auth-routes]]
             [tweetbook.routes.home :refer [home-routes]]))
 
+(def thread-pool (mk-pool))
+
 (defn init []
-  (println "tweetbook is starting"))
+  (do
+    (println "tweetbook is starting")
+    (every tweet-interval #(tweet-random) thread-pool)))
 
 (defn destroy []
   (println "tweetbook is shutting down"))
