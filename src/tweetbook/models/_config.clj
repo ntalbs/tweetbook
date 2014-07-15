@@ -9,3 +9,5 @@
    :access-token-secret "access-token-secret"})
 
 (def tweet-interval (* 1000 60 60 2))
+
+(def user {:id "id" :pw-hash "password-hash"})

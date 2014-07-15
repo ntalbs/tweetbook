@@ -1,23 +1,21 @@
 (ns tweetbook.routes.auth
   (:require [compojure.core :refer [defroutes GET POST]]
-            [tweetbook.views.layout :as layout]
-            [hiccup.form :refer [form-to label text-field password-field submit-button]]
+            [tweetbook.models.config :as config]
             [noir.response :refer [redirect]]
-            [noir.session :as session]))
+            [noir.session :as session]
+            [noir.util.crypt :as crypt]))
 
-(defn control [field name text]
-  (list (label name text)
-        (field name)
-        [:br]))
+(defn handle-login [id pw]
+  (if (and (= id (config/user :id)) (crypt/compare pw (config/user :pw-hash)))
+    (do
+      (session/put! :id id)
+      (redirect "/"))))
 
-(defn login-page []
-  (layout/common (form-to [:post "/login"]
-                          (control text-field :id "screen name")
-                          (control password-field :pass "password")
-                          (submit-button "login"))))
+(defn handle-logout []
+  (session/clear!)
+  (redirect "/login"))
 
 (defroutes auth-routes
-  (GET "/login" [] (login-page))
-  (POST "/login" [id pass]
-        (session/put! :user id)
-        (redirect "/")))
+  (GET "/login" [] (redirect "/login.html"))
+  (POST "/login" [id pw] (handle-login id pw))
+  (POST "/logout" [] (handle-logout)))
