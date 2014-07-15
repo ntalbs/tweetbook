@@ -1,0 +1,21 @@
+#login-container {
+  margin-top: 100px;
+  max-width: 500px;
+}
+
+#login-container p {
+  text-align: center;
+}
+
+#login-container .input-group {
+  display: block;
+}
+
+#login-container input {
+  margin-top: 2px;
+}
+
+#login-container button {
+  margin-top: 5px;
+  width: 100%;
+}
