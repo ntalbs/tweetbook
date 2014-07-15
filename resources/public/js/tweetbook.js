@@ -23,7 +23,7 @@ $(function () {
 
     var $listItem = $('<div class="alert alert-dismissible"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+quote.msg+'<br>'+quote.src +'</div>');
 
-    $listItem.appendTo($('#list-container')).css({color: "gray"});
+    $listItem.prependTo($('#list-container')).css({color: "gray"});
 
     $.post("/addmesg", quote).done(function (data) {
       console.log(data);
