@@ -14,7 +14,7 @@ $(function () {
 
   $('#msg, #src').on('keyup', function (e) { update(); });
 
-  $('form').submit(function (e) {
+  $('form#msg-input').submit(function (e) {
     var quote = {
       msg: $('#msg').val(),
       src: $('#src').val(),
