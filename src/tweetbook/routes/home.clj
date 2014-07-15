@@ -8,23 +8,16 @@
             [tweetbook.models.tweet :refer [tweet]]
             [tweetbook.models.db :as db]))
 
-(defn keywordify [m]
-  (into {} (for [[k v] m] [(keyword k) v])))
+(def page-file (file "src/tweetbook/routes/tweet.html"))
+
+(defn keywordify [m] (into {} (for [[k v] m] [(keyword k) v])))
 
 (defresource home
   :allowed-methods [:get]
   :available-media-types ["text/html"]
-
-  :exists?
-  (fn [_]
-    [(io/get-resource "/index.html")
-     {::file (file (str (io/resource-path) "/index.html"))}])
-
-  :handle-ok
-  (fn [_] (clojure.java.io/input-stream (io/get-resource "/index.html")))
-
-  :last-modified
-  (fn [_] (.lastModified (file (str (io/resource-path) "/index.html")))))
+  :exists? (fn [_] [(.getAbsolutePath page-file) {::file page-file}])
+  :last-modified (fn [_] (.lastModified page-file))
+  :handle-ok (fn [_] (clojure.java.io/input-stream page-file)))
 
 (defresource add-message
   :allowed-methods [:post]
