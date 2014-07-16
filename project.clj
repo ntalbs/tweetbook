@@ -1,6 +1,6 @@
 (defproject tweetbook "0.1.0"
   :description "Tweet snippets from books"
-  :url "http://{app-engine-id}.appspot.com"
+  :url "http://ntalbs-twtr.appspot.com"
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.1.6"]
                  [liberator "0.11.1"]
