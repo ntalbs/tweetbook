@@ -1,15 +1,14 @@
 (ns tweetbook.routes.home
   (:require [compojure.core :refer :all]
-            [liberator.core :refer [defresource resource request-method-in]]
+            [liberator.core :refer [defresource resource]]
             [cheshire.core :refer [generate-string]]
-            [noir.io :as io]
             [noir.session :as session]
-            [clojure.java.io :refer [file]]
+            [clojure.java.io :as io]
             [tweetbook.models.config :as config]
             [tweetbook.models.tweet :refer [tweet]]
             [tweetbook.models.db :as db]))
 
-(def page-file (file "src/tweetbook/routes/tweet.html"))
+(def page-file (io/file (io/resource "tweetbook/routes/tweet.html")))
 
 (defn keywordify [m] (into {} (for [[k v] m] [(keyword k) v])))
 
@@ -22,7 +21,7 @@
   :exists? (fn [_] [(.getAbsolutePath page-file) {::file page-file}])
   :last-modified (fn [_] (.lastModified page-file))
   :authorized? (fn [_] (= (session/get :id) (config/user :id)))
-  :handle-ok (fn [_] (clojure.java.io/input-stream page-file))
+  :handle-ok (fn [_] (io/input-stream page-file))
   :handle-unauthorized redirect-to-login-page)
 
 (defresource add-message
