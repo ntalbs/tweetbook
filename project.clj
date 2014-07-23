@@ -9,8 +9,7 @@
                  [lib-noir "0.8.4"]
                  [twitter-api "0.7.5"]
                  [overtone/at-at "1.2.0"]
-                 [com.novemberain/monger "2.0.0"]
-                 ]
+                 [com.novemberain/monger "2.0.0"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler tweetbook.handler/app
          :init tweetbook.handler/init
