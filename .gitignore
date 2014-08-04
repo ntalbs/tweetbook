@@ -2,11 +2,8 @@
 /lib
 /classes
 /checkouts
-pom.xml
+/pom.xml
+/.lein-*
 *.jar
 *.class
-.lein-deps-sum
-.lein-failures
-.lein-plugins
-.lein-env
 /stage
