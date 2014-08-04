@@ -4,13 +4,12 @@
             [cheshire.core :refer [generate-string]]
             [noir.session :as session]
             [clojure.java.io :as io]
+            [clojure.walk :refer [keywordize-keys]]
             [tweetbook.models.config :as config]
             [tweetbook.models.tweet :refer [tweet]]
             [tweetbook.models.db :as db]))
 
 (def page-file (io/file (io/resource "tweetbook/routes/tweet.html")))
-
-(defn keywordify [m] (into {} (for [[k v] m] [(keyword k) v])))
 
 (defn redirect-to-login-page [_]
   (liberator.representation/ring-response {:status 302, :headers {"Location" "/login"}, :body ""}))
@@ -29,7 +28,7 @@
   :available-media-types ["application/json"]
   :post!
   (fn [context]
-    (let [{:keys [msg src tweet-immediately]} (keywordify (get-in context [:request :form-params]))]
+    (let [{:keys [msg src tweet-immediately]} (keywordize-keys (get-in context [:request :form-params]))]
       (db/insert-msg {:msg msg, :src src})
       (if (= "on" tweet-immediately)
         (tweet (str msg "\n" src)))))
