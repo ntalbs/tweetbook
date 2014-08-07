@@ -7,3 +7,5 @@
 *.jar
 *.class
 /stage
+.env
+.env.fish
