@@ -1,7 +1,7 @@
 $(function () {
   var update = function () {
-    var msgCnt = $('#msg').val().length,
-        srcCnt = $('#src').val().length,
+    var msgCnt = $('#msg').css({'background-color':'inherit'}).val().length,
+        srcCnt = $('#src').css({'background-color':'inherit'}).val().length,
         count = msgCnt + srcCnt + (srcCnt > 0 ? 1 : 0);
     $('#count').text(140 - count);
   };
@@ -12,6 +12,10 @@ $(function () {
     $('#tweet-immediately').val('');
   };
 
+  var isValidateInput = function (quote) {
+    return !!(quote.msg && quote.src);
+  };
+
   $('#msg, #src').on('keyup', function (e) { update(); });
 
   $('form#msg-input').submit(function (e) {
@@ -20,6 +24,12 @@ $(function () {
       src: $('#src').val(),
       "tweet-immediately":  $('#tweet-immediately').val()
     };
+
+    if (!isValidateInput(quote)) {
+      if (!quote.msg) $('#msg').css({'background-color':'yellow'}).focus();
+      if (!quote.src) $('#src').css({'background-color':'yellow'}).focus();
+      return false;
+    }
 
     var $listItem = $('<div class="alert alert-dismissible"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+quote.msg+'<br>'+quote.src +'</div>');
 
