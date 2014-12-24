@@ -2,12 +2,12 @@
   :description "Tweet snippets from books"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [compojure "1.1.6"]
-                 [liberator "0.11.1"]
-                 [cheshire "5.3.1"]
+                 [compojure "1.3.1"]
+                 [liberator "0.12.2"]
+                 [cheshire "5.4.0"]
                  [ring-server "0.3.1"]
-                 [lib-noir "0.8.4"]
-                 [twitter-api "0.7.5"]
+                 [lib-noir "0.9.5"]
+                 [twitter-api "0.7.7"]
                  [overtone/at-at "1.2.0"]
                  [com.novemberain/monger "2.0.0"]]
   :plugins [[lein-ring "0.8.10"]]
