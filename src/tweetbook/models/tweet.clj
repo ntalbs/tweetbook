@@ -22,6 +22,10 @@
 (defn tweet-random []
   (tweet (random-msg)))
 
-;; (->> (followers-list :oauth-creds tweetbot-creds :params {:screen-name "ntalbs" :count 5000})
-;;      :body :users
-;;      (map (fn [e] [(:name e) (:screen_name e)])))
+(defn followers []
+  (->> (followers-list :oauth-creds tweetbot-creds :params {:screen-name "ntalbs" :count 5000})
+       :body :users
+       (map (fn [e] [(:name e) (:screen_name e)]))))
+
+(defn snapshot-followers []
+  (save-followers-snapshot (followers)))

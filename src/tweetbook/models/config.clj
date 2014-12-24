@@ -9,6 +9,7 @@
    :access-token-secret (System/getenv "TWEETBOOK_TWITTER_ACCESS_TOKEN_SECRET")})
 
 (def tweet-interval (* 1000 60 60 2))
+(def snapshot-interval (* 1000 60 60 24))
 
 (def user
   {:id (System/getenv "TWEETBOOK_ID")

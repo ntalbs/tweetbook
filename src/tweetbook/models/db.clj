@@ -24,3 +24,13 @@
                                    (mq/snapshot)))]
     (mg/disconnect conn)
     (str msg "\n" src)))
+
+(defn- now []
+  (let [fmt (java.text.SimpleDateFormat. "yyyy-MM-dd HH:mm:ss")]
+    (.. fmt (format (java.util.Date.)))))
+
+(defn save-followers-snapshot [followers]
+  (let [{:keys [conn db]} (mg/connect-via-uri config/db-uri)]
+    (mc/insert db "followers-snapshot"
+               {:datetime (now) :count (count followers) :followers followers})
+    (mg/disconnect conn)))
