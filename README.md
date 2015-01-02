@@ -15,7 +15,9 @@ You will need [Leiningen][1] 2.0.0 or above installed. And before execute the pr
     $ export TWEETBOOK_TWITTER_ACCESS_TOKEN_SECRET=...
     $ export TWEETBOOK_DB_URI=...
     $ export TWEETBOOK_ID=... #id for login
-    $ export TWEETBOOK_PW=... #password hash for login
+    $ export TWEETBOOK_PW_HASH=... #password hash for login
+
+Password hash should be generated with `noir.util.crypt/encrypt` function.
 
 [1]: https://github.com/technomancy/leiningen
 
