@@ -7,7 +7,15 @@ This is a simple tweet bot management program written in clojure. Main features 
 
 ## Prerequisites
 
-You will need [Leiningen][1] 2.0.0 or above installed.
+You will need [Leiningen][1] 2.0.0 or above installed. And before execute the project, you should set up the following environment variables.
+
+    $ export TWEETBOOK_TWITTER_CONSUMER_KEY=...
+    $ export TWEETBOOK_TWITTER_CONSUMER_SECRET=...
+    $ export TWEETBOOK_TWITTER_ACCESS_TOKEN=...
+    $ export TWEETBOOK_TWITTER_ACCESS_TOKEN_SECRET=...
+    $ export TWEETBOOK_DB_URI=...
+    $ export TWEETBOOK_ID=... #id for login
+    $ export TWEETBOOK_PW=... #password hash for login
 
 [1]: https://github.com/technomancy/leiningen
 
